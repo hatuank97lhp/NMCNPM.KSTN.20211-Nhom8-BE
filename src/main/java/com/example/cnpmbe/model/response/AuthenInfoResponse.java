@@ -12,6 +12,7 @@ import java.time.Instant;
 public class AuthenInfoResponse {
 
     private Long userId;
+    private String username;
     private String token;
     private String refreshToken;
     private Instant expiredIn;

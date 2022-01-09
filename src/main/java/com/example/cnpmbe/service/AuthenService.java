@@ -107,7 +107,7 @@ public class AuthenService {
             authTokenRepository.save(authToken);
         }
         // Trả về jwt cho người dùng.
-        AuthenInfoResponse authenInfoResponse = new AuthenInfoResponse(user.getId(),token, refreshToken, expiredIn);
+        AuthenInfoResponse authenInfoResponse = new AuthenInfoResponse(user.getId(), user.getUsername(), token, refreshToken, expiredIn);
         return ResponseEntity.ok(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, authenInfoResponse));
     }
 
