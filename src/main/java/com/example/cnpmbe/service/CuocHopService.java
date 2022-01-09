@@ -97,6 +97,9 @@ public class CuocHopService {
         for (HoKhau hoKhau: cuocHop.getHoKhaus()) {
             DiemDanh diemDanh = new DiemDanh();
             diemDanh.setDiemDanh(true);
+            diemDanh.setCuocHop(cuocHop);
+            diemDanh.setHoKhau(hoKhau);
+            diemDanh.setLyDo("");
             diemDanhRepository.save(diemDanh);
         }
 
