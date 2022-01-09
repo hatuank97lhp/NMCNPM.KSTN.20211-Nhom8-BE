@@ -1,0 +1,1463 @@
+{
+	"info": {
+		"_postman_id": "1b8dd30a-6adb-462d-a59a-86d67a292716",
+		"name": "quan ly dan cu API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authen",
+			"item": [
+				{
+					"name": "Đăng kí tài khoản",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"hatuan\",\r\n    \"password\": \"hatuan\",\r\n    \"name\": \"Hà Đức Tuấn\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/auth/register",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Đăng nhập",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"hatuan\",\r\n    \"password\": \"hatuan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/auth/login",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account theo id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/accounts/2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"accounts",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Đổi mật khẩu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\": \"tuan1\",\r\n    \"newPassword\": \"hatuan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/auth/change-password/2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"change-password",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nhân khẩu",
+			"item": [
+				{
+					"name": "Thêm mới nhân khẩu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức An\",\r\n    \"tenKhac\": \"dũng con\",\r\n    \"ngaySinh\": \"2001-02-20T00:00:00Z\",\r\n    \"gioiTinh\": \"Nam\",\r\n    \"cccd\": \"0123456788\",\r\n    \"soHoChieu\": \"1111\",\r\n    \"nguyenQuan\": \"Bình Lục, Hà Nam\",\r\n    \"danToc\": \"Kinh\",\r\n    \"tonGiao\": \"Không\",\r\n    \"quocTich\": \"Việt Nam\",\r\n    \"noiThuongTru\": \"An Ninh, Bình Lục, Hà Nam\",\r\n    \"diaChiHienTai\": \"An Ninh, Bình Lục, Hà Nam\",\r\n    \"trinhDoHocVan\": \"12/12\",\r\n    \"ngheNghiep\": \"Sinh viên\",\r\n    \"noiLamViec\": \"DH Bách Khoa Hà Nội\",\r\n    \"quanHeVoiChuHo\": \"Con\",\r\n    \"isChuHo\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/nhankhau",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"nhankhau"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Nhân khẩu theo Keyword",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức Dũng\",\r\n    \"tenKhac\": \"dũng con\",\r\n    \"ngaySinh\": \"2001-02-20T00:00:00Z\",\r\n    \"gioiTinh\": \"Nam\",\r\n    \"cccd\": \"0123456789\",\r\n    \"soHoChieu\": \"1111\",\r\n    \"nguyenQuan\": \"Bình Lục, Hà Nam\",\r\n    \"danToc\": \"Kinh\",\r\n    \"tonGiao\": \"Không\",\r\n    \"quocTich\": \"Việt Nam\",\r\n    \"noiThuongTru\": \"An Ninh, Bình Lục, Hà Nam\",\r\n    \"diaChiHienTai\": \"An Ninh, Bình Lục, Hà Nam\",\r\n    \"trinhDoHocVan\": \"12/12\",\r\n    \"ngheNghiep\": \"Sinh viên\",\r\n    \"noiLamViec\": \"DH Bách Khoa Hà Nội\",\r\n    \"quanHeVoiChuHo\": \"Chủ hộ\",\r\n    \"isChuHo\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/nhankhau?keyword=Ha&page=0&size=20",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"nhankhau"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "Ha"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Nhân khẩu theo Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức Dũng\",\r\n    \"tenKhac\": \"dũng con\",\r\n    \"ngaySinh\": \"2001-02-20T00:00:00Z\",\r\n    \"gioiTinh\": \"Nam\",\r\n    \"cccd\": \"0123456789\",\r\n    \"soHoChieu\": \"1111\",\r\n    \"nguyenQuan\": \"Bình Lục, Hà Nam\",\r\n    \"danToc\": \"Kinh\",\r\n    \"tonGiao\": \"Không\",\r\n    \"quocTich\": \"Việt Nam\",\r\n    \"noiThuongTru\": \"An Ninh, Bình Lục, Hà Nam\",\r\n    \"diaChiHienTai\": \"An Ninh, Bình Lục, Hà Nam\",\r\n    \"trinhDoHocVan\": \"12/12\",\r\n    \"ngheNghiep\": \"Sinh viên\",\r\n    \"noiLamViec\": \"DH Bách Khoa Hà Nội\",\r\n    \"quanHeVoiChuHo\": \"Chủ hộ\",\r\n    \"isChuHo\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/nhankhau/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"nhankhau",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cập nhật nhân khẩu theo id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức Tuấn\",\r\n    \"tenKhac\": \"dũng con\",\r\n    \"ngaySinh\": \"2001-02-20T00:00:00Z\",\r\n    \"gioiTinh\": \"Nam\",\r\n    \"cccd\": \"0111111111\",\r\n    \"soHoChieu\": \"1111\",\r\n    \"nguyenQuan\": \"Bình Lục, Hà Nam\",\r\n    \"danToc\": \"Kinh\",\r\n    \"tonGiao\": \"Không\",\r\n    \"quocTich\": \"Việt Nam\",\r\n    \"noiThuongTru\": \"An Ninh, Bình Lục, Hà Nam\",\r\n    \"diaChiHienTai\": \"An Ninh, Bình Lục, Hà Nam\",\r\n    \"trinhDoHocVan\": \"12/12\",\r\n    \"ngheNghiep\": \"Sinh viên\",\r\n    \"noiLamViec\": \"DH Bách Khoa Hà Nội\",\r\n    \"quanHeVoiChuHo\": \"Chủ hộ\",\r\n    \"isChuHo\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/nhankhau/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"nhankhau",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Xóa nhân khẩu theo id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức Tuấn\",\r\n    \"tenKhac\": \"dũng con\",\r\n    \"ngaySinh\": \"2001-02-20T00:00:00Z\",\r\n    \"gioiTinh\": \"Nam\",\r\n    \"cccd\": \"0111111111\",\r\n    \"soHoChieu\": \"1111\",\r\n    \"nguyenQuan\": \"Bình Lục, Hà Nam\",\r\n    \"danToc\": \"Kinh\",\r\n    \"tonGiao\": \"Không\",\r\n    \"quocTich\": \"Việt Nam\",\r\n    \"noiThuongTru\": \"An Ninh, Bình Lục, Hà Nam\",\r\n    \"diaChiHienTai\": \"An Ninh, Bình Lục, Hà Nam\",\r\n    \"trinhDoHocVan\": \"12/12\",\r\n    \"ngheNghiep\": \"Sinh viên\",\r\n    \"noiLamViec\": \"DH Bách Khoa Hà Nội\",\r\n    \"quanHeVoiChuHo\": \"Chủ hộ\",\r\n    \"isChuHo\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/nhankhau/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"nhankhau",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hộ Khẩu",
+			"item": [
+				{
+					"name": "Thêm mới hộ khẩu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoTenChuHo\": \"Hà Đức Tuấn\",\r\n    \"cccdChuHo\": \"0111111111\",\r\n    \"diaChi\": \"thôn 8, An Ninh, Bình Lục, Hà Nam\",\r\n    \"nhanKhaus\": [1, 2, 3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/hokhau",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"hokhau"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sửa thông tin Hộ Khẩu theo Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoTenChuHo\": \"Hà Đức Tuấn\",\r\n    \"cccdChuHo\": \"0111111111\",\r\n    \"diaChi\": \"thôn 9, An Ninh, Bình Lục, Hà Nam\",\r\n    \"nhanKhaus\": [1, 2, 3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/hokhau/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"hokhau",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Hộ khẩu theo id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoTenChuHo\": \"Hà Đức Tuấn\",\r\n    \"cccdChuHo\": \"0111111111\",\r\n    \"diaChi\": \"thôn 9, An Ninh, Bình Lục, Hà Nam\",\r\n    \"nhanKhaus\": [1, 2, 3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/hokhau/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"hokhau",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy hộ khẩu theo Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoTenChuHo\": \"Hà Đức Tuấn\",\r\n    \"cccdChuHo\": \"0111111111\",\r\n    \"diaChi\": \"thôn 9, An Ninh, Bình Lục, Hà Nam\",\r\n    \"nhanKhaus\": [1, 2, 3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/hokhau/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"hokhau",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy các hộ khẩu theo Keyword",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoTenChuHo\": \"Hà Đức Tuấn\",\r\n    \"cccdChuHo\": \"0111111111\",\r\n    \"diaChi\": \"thôn 9, An Ninh, Bình Lục, Hà Nam\",\r\n    \"nhanKhaus\": [1, 2, 3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/hokhau?keyword=a&page=0&size=20",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"hokhau"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "a"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cuộc họp",
+			"item": [
+				{
+					"name": "Thêm mới cuộc họp",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tieuDe\": \"Họp tháng 10\",\r\n    \"thoiGian\": \"2021-10-30T13:00:00Z\",\r\n    \"diaDiem\": \"nhà văn hóa thôn\",\r\n    \"noiDung\": \"Họp tổng kết tháng 10\",\r\n    \"banBaoCao\": \"13h: Có mặt ...\",\r\n    \"nguoiTao\": \"Hà Đức Tuấn\",\r\n    \"hoKhaus\": [1]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/cuochop",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuochop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Thêm mới hộ khẩu vào cuộc họp /idCuochop/idHoKhau",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tieuDe\": \"Họp tháng 10\",\r\n    \"thoiGian\": \"2021-10-30T13:00:00Z\",\r\n    \"diaDiem\": \"nhà văn hóa thôn\",\r\n    \"noiDung\": \"Họp tổng kết tháng 10\",\r\n    \"banBaoCao\": \"13h: Có mặt ...\",\r\n    \"nguoiTao\": \"Hà Đức Tuấn\",\r\n    \"hoKhaus\": [1]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/cuochop/1/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuochop",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Điểm danh cuộc họp",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoKhau\": 1,\r\n    \"cuocHop\": 1,\r\n    \"diemDanh\": true,\r\n    \"lyDo\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/cuochop/diemdanh",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuochop",
+								"diemdanh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy danh sách điểm danh theo id cuộc hop",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoKhau\": 1,\r\n    \"cuocHop\": 1,\r\n    \"diemDanh\": true,\r\n    \"lyDo\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/cuochop/1/diemdanh",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuochop",
+								"1",
+								"diemdanh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Xóa hộ khẩu khỏi cuộc họp /idCuochop/idHoKhau",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tieuDe\": \"Họp tháng 10\",\r\n    \"thoiGian\": \"2021-10-30T13:00:00Z\",\r\n    \"diaDiem\": \"nhà văn hóa thôn\",\r\n    \"noiDung\": \"Họp tổng kết tháng 10\",\r\n    \"banBaoCao\": \"13h: Có mặt ...\",\r\n    \"nguoiTao\": \"Hà Đức Tuấn\",\r\n    \"hoKhaus\": [1]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/cuochop/1/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuochop",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update cuộc họp",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tieuDe\": \"Họp tháng 10\",\r\n    \"thoiGian\": \"2021-10-30T13:00:00Z\",\r\n    \"diaDiem\": \"nhà văn hóa thôn\",\r\n    \"noiDung\": \"Họp tổng kết tháng 10\",\r\n    \"banBaoCao\": \"13h: Có mặt ...\",\r\n    \"nguoiTao\": \"Hà Đức Tuấn\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/cuochop/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuochop",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Xóa cuộc họp theo Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tieuDe\": \"Họp tháng 10\",\r\n    \"thoiGian\": \"2021-10-30T13:00:00Z\",\r\n    \"diaDiem\": \"nhà văn hóa thôn\",\r\n    \"noiDung\": \"Họp tổng kết tháng 10\",\r\n    \"banBaoCao\": \"13h: Có mặt ...\",\r\n    \"nguoiTao\": \"Hà Đức Tuấn\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/cuochop/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuochop",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy cuộc họp theo Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tieuDe\": \"Họp tháng 10\",\r\n    \"thoiGian\": \"2021-10-30T13:00:00Z\",\r\n    \"diaDiem\": \"nhà văn hóa thôn\",\r\n    \"noiDung\": \"Họp tổng kết tháng 10\",\r\n    \"banBaoCao\": \"13h: Có mặt ...\",\r\n    \"nguoiTao\": \"Hà Đức Tuấn\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/cuochop/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuochop",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy cuộc họp theo Keyword",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tieuDe\": \"Họp tháng 10\",\r\n    \"thoiGian\": \"2021-10-30T13:00:00Z\",\r\n    \"diaDiem\": \"nhà văn hóa thôn\",\r\n    \"noiDung\": \"Họp tổng kết tháng 10\",\r\n    \"banBaoCao\": \"13h: Có mặt ...\",\r\n    \"nguoiTao\": \"Hà Đức Tuấn\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/cuochop?keyword=a&page=0&size=20",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuochop"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "a"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Thống kê cuộc họp theo thời gian time={1moths, 3moths, 1years, 3years}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tieuDe\": \"Họp tháng 10\",\r\n    \"thoiGian\": \"2021-10-30T13:00:00Z\",\r\n    \"diaDiem\": \"nhà văn hóa thôn\",\r\n    \"noiDung\": \"Họp tổng kết tháng 10\",\r\n    \"banBaoCao\": \"13h: Có mặt ...\",\r\n    \"nguoiTao\": \"Hà Đức Tuấn\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/cuochop/thongkecuochop?time=1years",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuochop",
+								"thongkecuochop"
+							],
+							"query": [
+								{
+									"key": "time",
+									"value": "1years"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Thống kê người tham dự cuộc họp theo thời gian time={1moths, 3moths, 1years, 3years} Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tieuDe\": \"Họp tháng 10\",\r\n    \"thoiGian\": \"2021-10-30T13:00:00Z\",\r\n    \"diaDiem\": \"nhà văn hóa thôn\",\r\n    \"noiDung\": \"Họp tổng kết tháng 10\",\r\n    \"banBaoCao\": \"13h: Có mặt ...\",\r\n    \"nguoiTao\": \"Hà Đức Tuấn\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/cuochop/thongkenguoithamgia?time=1years",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuochop",
+								"thongkenguoithamgia"
+							],
+							"query": [
+								{
+									"key": "time",
+									"value": "1years"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy danh sách của hộ khẩu theo id tham dự cuộc họp theo thời gian time={1moths, 3moths, 1years, 3years}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tieuDe\": \"Họp tháng 10\",\r\n    \"thoiGian\": \"2021-10-30T13:00:00Z\",\r\n    \"diaDiem\": \"nhà văn hóa thôn\",\r\n    \"noiDung\": \"Họp tổng kết tháng 10\",\r\n    \"banBaoCao\": \"13h: Có mặt ...\",\r\n    \"nguoiTao\": \"Hà Đức Tuấn\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/cuochop/thongkenguoithamgia/1?time=1years",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuochop",
+								"thongkenguoithamgia",
+								"1"
+							],
+							"query": [
+								{
+									"key": "time",
+									"value": "1years"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tạm vắng",
+			"item": [
+				{
+					"name": "Thêm mới tạm vắng",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức A\",\r\n    \"cccd\": \"0987654321\",\r\n    \"diaChi\": \"Hà Nam\",\r\n    \"tuNgay\": \"2020-10-10T00:00:00Z\",\r\n    \"denNgay\": \"2020-11-20T00:00:00Z\",\r\n    \"lyDo\": \"Đi học\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tamvang",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tamvang"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sửa tạm vắng theo id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức A\",\r\n    \"cccd\": \"0987654321\",\r\n    \"diaChi\": \"Hà Nam\",\r\n    \"tuNgay\": \"2020-10-10T00:00:00Z\",\r\n    \"denNgay\": \"2020-11-20T00:00:00Z\",\r\n    \"lyDo\": \"Đi học\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tamvang/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tamvang",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy tạm vắng theo Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức A\",\r\n    \"cccd\": \"0987654321\",\r\n    \"diaChi\": \"Hà Nam\",\r\n    \"tuNgay\": \"2020-10-10T00:00:00Z\",\r\n    \"denNgay\": \"2020-11-20T00:00:00Z\",\r\n    \"lyDo\": \"Đi học\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tamvang/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tamvang",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy tất cả tạm vắng theo keyword",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức A\",\r\n    \"cccd\": \"0987654321\",\r\n    \"diaChi\": \"Hà Nam\",\r\n    \"tuNgay\": \"2020-10-10T00:00:00Z\",\r\n    \"denNgay\": \"2020-11-20T00:00:00Z\",\r\n    \"lyDo\": \"Đi học\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tamvang?keyword=&page=0&size=20",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tamvang"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tạm trú",
+			"item": [
+				{
+					"name": "Thêm mới tạm trú",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức A\",\r\n    \"cccd\": \"0987654321\",\r\n    \"diaChi\": \"Hà Nam\",\r\n    \"tuNgay\": \"2020-10-10T00:00:00Z\",\r\n    \"denNgay\": \"2020-11-20T00:00:00Z\",\r\n    \"lyDo\": \"Đi học\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tamtru",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tamtru"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sửa tạm trú theo id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức A\",\r\n    \"cccd\": \"0987654321\",\r\n    \"diaChi\": \"Hà Nam\",\r\n    \"tuNgay\": \"2020-10-10T00:00:00Z\",\r\n    \"denNgay\": \"2020-11-20T00:00:00Z\",\r\n    \"lyDo\": \"Đi học\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tamtru/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tamtru",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy tạm trú theo Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức A\",\r\n    \"cccd\": \"0987654321\",\r\n    \"diaChi\": \"Hà Nam\",\r\n    \"tuNgay\": \"2020-10-10T00:00:00Z\",\r\n    \"denNgay\": \"2020-11-20T00:00:00Z\",\r\n    \"lyDo\": \"Đi học\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tamtru/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tamtru",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy tất cả tạm trú theo keyword",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức A\",\r\n    \"cccd\": \"0987654321\",\r\n    \"diaChi\": \"Hà Nam\",\r\n    \"tuNgay\": \"2020-10-10T00:00:00Z\",\r\n    \"denNgay\": \"2020-11-20T00:00:00Z\",\r\n    \"lyDo\": \"Đi học\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tamtru?keyword=&page=0&size=20",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tamtru"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
