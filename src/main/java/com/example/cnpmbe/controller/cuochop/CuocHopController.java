@@ -151,4 +151,10 @@ public class CuocHopController {
         return response;
     }
 
+    @GetMapping("/danhsachmoi")
+    public ResponseEntity<APIResponse> getDanhSachMoi() {
+        ResponseEntity<APIResponse> response = cuocHopService.getDanhSachMoi();
+        return response;
+    }
+
 }

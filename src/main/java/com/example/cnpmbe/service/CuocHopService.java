@@ -21,6 +21,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.transaction.Transactional;
 import java.time.Instant;
@@ -447,5 +448,22 @@ public class CuocHopService {
         CuocHopSimpleResponse cuocHopSimpleResponse = new CuocHopSimpleResponse(cuocHop);
         return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, cuocHopSimpleResponse));
 
+    }
+
+    @GetMapping
+    public ResponseEntity<APIResponse> getDanhSachMoi() {
+        List<HoKhau> notInvited = hoKhauRepository.findAll();
+
+        List<HoKhauCuocHopResponse> response = new ArrayList<>();
+
+        for (HoKhau hoKhau: notInvited) {
+            HoKhauCuocHopResponse hoKhauCuocHopResponse = new HoKhauCuocHopResponse();
+            hoKhauCuocHopResponse.setId( hoKhau.getId() );
+            hoKhauCuocHopResponse.setHoTenChuHo( hoKhau.getHoTenChuHo() );
+            hoKhauCuocHopResponse.setInvited(false);
+            response.add(hoKhauCuocHopResponse);
+        }
+
+        return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, response));
     }
 }

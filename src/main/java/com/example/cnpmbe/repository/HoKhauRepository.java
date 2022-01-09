@@ -20,4 +20,6 @@ public interface HoKhauRepository extends JpaRepository<HoKhau, Long> {
     List<HoKhau> getAllByIdIn(List<Long> ids);
 
     List<HoKhau> getAllByIdNotIn(List<Long> ids);
+
+    List<HoKhau> findAll();
 }
