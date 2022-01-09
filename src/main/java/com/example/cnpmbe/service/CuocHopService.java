@@ -47,8 +47,16 @@ public class CuocHopService {
         Page<CuocHop> cuocHops = cuocHopRepository.findAllByTieuDeContains(keyword, pageable);
 
         List<CuocHopSimpleResponse> cuocHopSimpleResponses = new ArrayList<>();
-        for (CuocHop cuocHop: cuocHops)
-            cuocHopSimpleResponses.add(new CuocHopSimpleResponse(cuocHop));
+        for (CuocHop cuocHop: cuocHops) {
+            CuocHopSimpleResponse cuocHopSimpleResponse = new CuocHopSimpleResponse(cuocHop);
+            List<DiemDanh> diemDanhs = diemDanhRepository.getAllByCuocHopIdAndDiemDanh(cuocHop.getId(), true);
+            List<DiemDanh> vangMat = diemDanhRepository.getAllByCuocHopIdAndDiemDanh(cuocHop.getId(), false);
+
+            cuocHopSimpleResponse.setVangMat((long)vangMat.size());
+            cuocHopSimpleResponse.setThamGia((long)diemDanhs.size());
+
+            cuocHopSimpleResponses.add(cuocHopSimpleResponse);
+        }
 
         Page<CuocHopSimpleResponse> page = new PageImpl<>(cuocHopSimpleResponses, pageable, cuocHopSimpleResponses.size());
 
@@ -62,6 +70,13 @@ public class CuocHopService {
             return ResponseEntity.badRequest().body(APIResponseBuilder.buildExceptionResponse(ExceptionMessages.CUOC_HOP_ID_NOT_FOUND));
 
         CuocHopSimpleResponse cuocHopSimpleResponse = new CuocHopSimpleResponse(cuocHop.get());
+
+        List<DiemDanh> diemDanhs = diemDanhRepository.getAllByCuocHopIdAndDiemDanh(cuocHop.get().getId(), true);
+        List<DiemDanh> vangMat = diemDanhRepository.getAllByCuocHopIdAndDiemDanh(cuocHop.get().getId(), false);
+
+        cuocHopSimpleResponse.setVangMat((long)vangMat.size());
+        cuocHopSimpleResponse.setThamGia((long)diemDanhs.size());
+
         return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, cuocHopSimpleResponse));
     }
 

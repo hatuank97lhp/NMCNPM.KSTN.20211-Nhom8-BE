@@ -30,6 +30,10 @@ public class CuocHopSimpleResponse {
 
     private List<HoKhauSimpleResponse> hoKhaus = new ArrayList<>();
 
+    private Long thamGia = 0L;
+
+    private Long vangMat = 0L;
+
     public CuocHopSimpleResponse(CuocHop cuocHop) {
         id = cuocHop.getId();
         tieuDe = cuocHop.getTieuDe();
