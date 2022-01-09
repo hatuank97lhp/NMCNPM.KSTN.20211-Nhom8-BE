@@ -17,10 +17,13 @@ public class DiemDanhSimpleResponse {
 
     private String lyDo = "";
 
+    private String hoTenChuHo = "";
+
     public DiemDanhSimpleResponse(DiemDanh diemDanhX) {
         hoKhau = diemDanhX.getHoKhau().getId();
         cuocHop = diemDanhX.getCuocHop().getId();
         diemDanh = diemDanhX.getDiemDanh();
         lyDo = diemDanhX.getLyDo();
+        hoTenChuHo = diemDanhX.getHoKhau().getHoTenChuHo();
     }
 }
