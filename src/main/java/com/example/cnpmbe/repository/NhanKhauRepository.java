@@ -1,6 +1,7 @@
 package com.example.cnpmbe.repository;
 
 import com.example.cnpmbe.model.entity.nhankhau.NhanKhau;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface NhanKhauRepository extends JpaRepository<NhanKhau, Long> {
-    List<NhanKhau> getAllByHoVaTenContainsOrCccdContains(String hoVaTen, String cccd, Pageable pageable);
+    Page<NhanKhau> getAllByHoVaTenContainsOrCccdContains(String hoVaTen, String cccd, Pageable pageable);
 
     Optional<NhanKhau> findById(Long id);
 

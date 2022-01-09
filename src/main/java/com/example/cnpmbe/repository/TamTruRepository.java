@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface TamTruRepository extends JpaRepository<TamTru, Long> {
-    List<TamTru> getAllByHoVaTenContainsOrCccdContains(String hoVaTen, String cccd, Pageable pageable);
+    Page<TamTru> getAllByHoVaTenContainsOrCccdContains(String hoVaTen, String cccd, Pageable pageable);
 
     Optional<TamTru> findById(Long id);
 

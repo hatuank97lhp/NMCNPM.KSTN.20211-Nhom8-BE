@@ -7,6 +7,7 @@ import com.example.cnpmbe.model.entity.HoatDong;
 import com.example.cnpmbe.repository.HoatDongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.ReadOnlyProperty;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class HoatDongService {
 
     @ReadOnlyProperty
     public ResponseEntity<APIResponse> getAll(Pageable pageable) {
-        List<HoatDong> hoatDongs = hoatDongRepository.findAllByOrderByTimeDesc(pageable);
+        Page<HoatDong> hoatDongs = hoatDongRepository.findAllByOrderByTimeDesc(pageable);
         return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, hoatDongs));
     }
 

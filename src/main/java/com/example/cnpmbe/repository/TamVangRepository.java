@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface TamVangRepository extends JpaRepository<TamVang, Long> {
-    List<TamVang> getAllByHoVaTenContainsOrCccdContains(String hoVaTen, String cccd, Pageable pageable);
+    Page<TamVang> getAllByHoVaTenContainsOrCccdContains(String hoVaTen, String cccd, Pageable pageable);
 
     Optional<TamVang> findById(Long id);
 

@@ -15,6 +15,7 @@ import com.example.cnpmbe.repository.HoKhauRepository;
 import com.example.cnpmbe.repository.NhanKhauRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.ReadOnlyProperty;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ public class HoKhauService {
 
     @ReadOnlyProperty
     public ResponseEntity<APIResponse> getAllHoKhau(String keyword, Pageable pageable) {
-        List<HoKhau> hoKhaus = hoKhauRepository.getAllByHoTenChuHoContainsOrCccdChuHoContains(keyword, keyword, pageable);
+        Page<HoKhau> hoKhaus = hoKhauRepository.getAllByHoTenChuHoContainsOrCccdChuHoContains(keyword, keyword, pageable);
 
         return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, hoKhaus));
     }

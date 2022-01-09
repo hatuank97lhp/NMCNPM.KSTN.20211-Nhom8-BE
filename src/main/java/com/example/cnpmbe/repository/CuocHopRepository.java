@@ -1,6 +1,7 @@
 package com.example.cnpmbe.repository;
 
 import com.example.cnpmbe.model.entity.cuochop.CuocHop;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,7 +14,7 @@ import java.util.Optional;
 public interface CuocHopRepository extends JpaRepository<CuocHop, Long> {
     List<CuocHop> findAllByHoKhausId(Long id);
 
-    List<CuocHop> findAllByTieuDeContains(String tieuDe, Pageable pageable);
+    Page<CuocHop> findAllByTieuDeContains(String tieuDe, Pageable pageable);
 
     Optional<CuocHop> findById(Long id);
 

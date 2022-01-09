@@ -29,7 +29,7 @@ public class TamVangService {
 
     @ReadOnlyProperty
     public ResponseEntity<APIResponse> getAllTamVang(String keyword, Pageable pageable) {
-        List<TamVang> tamVangs = tamVangRepository.getAllByHoVaTenContainsOrCccdContains(keyword, keyword, pageable);
+        Page<TamVang> tamVangs = tamVangRepository.getAllByHoVaTenContainsOrCccdContains(keyword, keyword, pageable);
         return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, tamVangs));
     }
 

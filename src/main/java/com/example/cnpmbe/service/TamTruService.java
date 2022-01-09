@@ -29,7 +29,7 @@ public class TamTruService {
 
     @ReadOnlyProperty
     public ResponseEntity<APIResponse> getAllTamTru(String keyword, Pageable pageable) {
-        List<TamTru> tamTrus = tamTruRepository.getAllByHoVaTenContainsOrCccdContains(keyword, keyword, pageable);
+        Page<TamTru> tamTrus = tamTruRepository.getAllByHoVaTenContainsOrCccdContains(keyword, keyword, pageable);
         return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, tamTrus));
     }
 

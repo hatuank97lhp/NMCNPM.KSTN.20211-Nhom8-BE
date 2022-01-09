@@ -13,6 +13,7 @@ import com.example.cnpmbe.repository.HoKhauRepository;
 import com.example.cnpmbe.repository.NhanKhauRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.ReadOnlyProperty;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class NhanKhauService {
 
     @ReadOnlyProperty
     public ResponseEntity<APIResponse> getAllNhanKhau(Pageable pageable, String keyword) {
-        List<NhanKhau> nhanKhaus = nhanKhauRepository.getAllByHoVaTenContainsOrCccdContains(keyword, keyword, pageable);
+        Page<NhanKhau> nhanKhaus = nhanKhauRepository.getAllByHoVaTenContainsOrCccdContains(keyword, keyword, pageable);
         return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, nhanKhaus));
     }
 

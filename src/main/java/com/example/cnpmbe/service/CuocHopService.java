@@ -15,6 +15,8 @@ import com.example.cnpmbe.repository.DiemDanhRepository;
 import com.example.cnpmbe.repository.HoKhauRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.ReadOnlyProperty;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -42,12 +44,15 @@ public class CuocHopService {
 
     @ReadOnlyProperty
     public ResponseEntity<APIResponse> getAllCuocHop(String keyword, Pageable pageable) {
-        List<CuocHop> cuocHops = cuocHopRepository.findAllByTieuDeContains(keyword, pageable);
+        Page<CuocHop> cuocHops = cuocHopRepository.findAllByTieuDeContains(keyword, pageable);
 
         List<CuocHopSimpleResponse> cuocHopSimpleResponses = new ArrayList<>();
         for (CuocHop cuocHop: cuocHops)
             cuocHopSimpleResponses.add(new CuocHopSimpleResponse(cuocHop));
-        return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, cuocHopSimpleResponses));
+
+        Page<CuocHopSimpleResponse> page = new PageImpl<>(cuocHopSimpleResponses, pageable, cuocHopSimpleResponses.size());
+
+        return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, page));
     }
 
     @ReadOnlyProperty
