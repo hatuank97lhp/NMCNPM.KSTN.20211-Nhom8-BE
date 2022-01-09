@@ -3,6 +3,7 @@ package com.example.cnpmbe.controller.cuochop;
 import com.example.cnpmbe.common.APIResponse;
 import com.example.cnpmbe.model.request.cuochop.CuocHopRequest;
 import com.example.cnpmbe.model.request.cuochop.DiemDanhRequest;
+import com.example.cnpmbe.model.request.cuochop.HoKhauCuocHop;
 import com.example.cnpmbe.service.CuocHopService;
 import com.example.cnpmbe.service.DiemDanhService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,8 +139,16 @@ public class CuocHopController {
         return response;
     }
 
+    @GetMapping("/danhsachthamgia/{id}")
+    public ResponseEntity<APIResponse> layDanhSachCacHoKhauTheoCuochop(@PathVariable Long id) {
+        ResponseEntity<APIResponse> response = cuocHopService.getAllNguoiThamGia(id);
+        return response;
+    }
 
-
-
+    @PostMapping("/danhsachthamgia/{id}")
+    public ResponseEntity<APIResponse> updateDanhSachThamGia(@PathVariable Long id, @RequestBody @Valid HoKhauCuocHop hoKhauCuocHop) {
+        ResponseEntity<APIResponse> response = cuocHopService.capNhatDanhSachThamGia(id, hoKhauCuocHop);
+        return response;
+    }
 
 }

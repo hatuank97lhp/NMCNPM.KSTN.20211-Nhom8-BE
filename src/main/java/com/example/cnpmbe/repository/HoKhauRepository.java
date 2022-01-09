@@ -16,4 +16,8 @@ public interface HoKhauRepository extends JpaRepository<HoKhau, Long> {
     Page<HoKhau> getAllByHoTenChuHoContainsOrCccdChuHoContains(String hoTenChuHo, String cccdChuHo, Pageable pageable);
 
     Optional<HoKhau> findById(Long id);
+
+    List<HoKhau> getAllByIdIn(List<Long> ids);
+
+    List<HoKhau> getAllByIdNotIn(List<Long> ids);
 }

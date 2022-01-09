@@ -121,11 +121,10 @@ public class HoKhauService {
         }
         cuocHopRepository.saveAll(cuocHops);
 
-        List<DiemDanh> diemDanhs = diemDanhRepository.getAllByCuocHopId(id);
+        List<DiemDanh> diemDanhs = diemDanhRepository.getAllByHoKhauId(id);
         for (DiemDanh diemDanh: diemDanhs)
             diemDanhRepository.delete(diemDanh);
 
-        hoKhauRepository.save(hoKhau);
         hoatDongService.createrNew("Xóa hộ khẩu: " + hoKhau.getHoTenChuHo());
         hoKhauRepository.delete(hoKhau);
 

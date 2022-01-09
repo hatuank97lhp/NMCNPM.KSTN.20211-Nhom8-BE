@@ -19,10 +19,13 @@ public class CuocHopEzResponse {
 
     private String diaDiem;
 
+    private String nguoiTao;
+
     public CuocHopEzResponse(CuocHop cuocHop) {
         id = cuocHop.getId();
         thoiGian = cuocHop.getThoiGian();
         tieuDe = cuocHop.getTieuDe();
         diaDiem = cuocHop.getDiaDiem();
+        nguoiTao = cuocHop.getNguoiTao();
     }
 }

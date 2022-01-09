@@ -9,6 +9,7 @@ import com.example.cnpmbe.model.entity.cuochop.DiemDanh;
 import com.example.cnpmbe.model.entity.hokhau.HoKhau;
 import com.example.cnpmbe.model.request.cuochop.CuocHopRequest;
 import com.example.cnpmbe.model.request.cuochop.DiemDanhRequest;
+import com.example.cnpmbe.model.request.cuochop.HoKhauCuocHop;
 import com.example.cnpmbe.model.response.*;
 import com.example.cnpmbe.repository.CuocHopRepository;
 import com.example.cnpmbe.repository.DiemDanhRepository;
@@ -352,5 +353,99 @@ public class CuocHopService {
         chiTiet.setVangKhongLyDo(chiTiet.getCuocHopVangKhongLyDo().size());
 
         return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, chiTiet));
+    }
+
+    @ReadOnlyProperty
+    public ResponseEntity<APIResponse> getAllNguoiThamGia(Long idCuochop) {
+        Optional<CuocHop> cuocHopOptional = cuocHopRepository.findById(idCuochop);
+        if (!cuocHopOptional.isPresent())
+            return ResponseEntity.badRequest().body(APIResponseBuilder.buildExceptionResponse(ExceptionMessages.CUOC_HOP_ID_NOT_FOUND));
+
+        CuocHop cuocHop = cuocHopOptional.get();
+        List<Long> idHoKhau = new ArrayList<>();
+        for (HoKhau hoKhau: cuocHop.getHoKhaus()) {
+            idHoKhau.add(hoKhau.getId());
+        }
+
+        List<HoKhau> invited = hoKhauRepository.getAllByIdIn(idHoKhau);
+        List<HoKhau> notInvited = hoKhauRepository.getAllByIdNotIn(idHoKhau);
+
+        List<HoKhauCuocHopResponse> response = new ArrayList<>();
+        for (HoKhau hoKhau: invited) {
+            HoKhauCuocHopResponse hoKhauCuocHopResponse = new HoKhauCuocHopResponse();
+            hoKhauCuocHopResponse.setId( hoKhau.getId() );
+            hoKhauCuocHopResponse.setHoTenChuHo( hoKhau.getHoTenChuHo() );
+            hoKhauCuocHopResponse.setInvited(true);
+            response.add(hoKhauCuocHopResponse);
+        }
+
+        for (HoKhau hoKhau: notInvited) {
+            HoKhauCuocHopResponse hoKhauCuocHopResponse = new HoKhauCuocHopResponse();
+            hoKhauCuocHopResponse.setId( hoKhau.getId() );
+            hoKhauCuocHopResponse.setHoTenChuHo( hoKhau.getHoTenChuHo() );
+            hoKhauCuocHopResponse.setInvited(false);
+            response.add(hoKhauCuocHopResponse);
+        }
+
+        return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, response));
+    }
+
+    @Transactional
+    public ResponseEntity<APIResponse> capNhatDanhSachThamGia(Long idCuochop, HoKhauCuocHop hoKhauCuocHop) {
+        Optional<CuocHop> cuocHopOptional = cuocHopRepository.findById(idCuochop);
+        if (!cuocHopOptional.isPresent())
+            return ResponseEntity.badRequest().body(APIResponseBuilder.buildExceptionResponse(ExceptionMessages.CUOC_HOP_ID_NOT_FOUND));
+
+        CuocHop cuocHop = cuocHopOptional.get();
+
+        Set<Long> idNhanKhauCu = new HashSet<>();
+        Set<Long> idNhanKhauMoi = new HashSet<>();
+
+        for (HoKhau hoKhau: cuocHop.getHoKhaus()) {
+            if (!idNhanKhauCu.contains(hoKhau.getId()))
+                idNhanKhauCu.add(hoKhau.getId());
+        }
+
+        for (Long idMoi: hoKhauCuocHop.getHoKhaus()) {
+            if (!idNhanKhauMoi.contains(idMoi)) {
+                idNhanKhauMoi.add(idMoi);
+            }
+        }
+
+        for (HoKhau hoKhau: cuocHop.getHoKhaus()) {
+            if (!idNhanKhauMoi.contains(hoKhau.getId())) {
+                Optional<DiemDanh> diemDanh = diemDanhRepository.getByCuocHopIdAndHoKhauId(cuocHop.getId(), hoKhau.getId());
+                if (diemDanh.isPresent()) {
+                    diemDanhRepository.delete(diemDanh.get());
+                }
+            }
+        }
+
+        for (int i = cuocHop.getHoKhaus().size() - 1; i >= 0; i--) {
+            if (!idNhanKhauMoi.contains(cuocHop.getHoKhaus().get(i).getId())) {
+                cuocHop.getHoKhaus().remove(i);
+            }
+        }
+
+        for (Long idMoi: idNhanKhauMoi) {
+            if (!idNhanKhauCu.contains(idMoi)) {
+                Optional<HoKhau> hoKhauOptional = hoKhauRepository.findById(idMoi);
+                if (hoKhauOptional.isPresent()) {
+                    DiemDanh diemDanh = new DiemDanh();
+                    diemDanh.setDiemDanh(true);
+                    diemDanh.setCuocHop(cuocHop);
+                    diemDanh.setHoKhau(hoKhauOptional.get());
+                    diemDanh.setLyDo("");
+
+                    diemDanhRepository.save(diemDanh);
+                    cuocHop.getHoKhaus().add(hoKhauOptional.get());
+                }
+            }
+        }
+
+        cuocHopRepository.save(cuocHop);
+        CuocHopSimpleResponse cuocHopSimpleResponse = new CuocHopSimpleResponse(cuocHop);
+        return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, cuocHopSimpleResponse));
+
     }
 }
