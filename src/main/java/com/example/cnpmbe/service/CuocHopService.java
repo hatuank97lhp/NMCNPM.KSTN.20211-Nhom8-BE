@@ -97,6 +97,11 @@ public class CuocHopService {
         cuocHopRepository.save(cuocHop);
 
         for (HoKhau hoKhau: cuocHop.getHoKhaus()) {
+
+            Optional<DiemDanh> diemDanhOptional = diemDanhRepository.getByCuocHopIdAndHoKhauId(cuocHop.getId(), hoKhau.getId());
+            if (diemDanhOptional.isPresent())
+                continue;
+
             DiemDanh diemDanh = new DiemDanh();
             diemDanh.setDiemDanh(true);
             diemDanh.setCuocHop(cuocHop);
@@ -432,6 +437,11 @@ public class CuocHopService {
             if (!idNhanKhauCu.contains(idMoi)) {
                 Optional<HoKhau> hoKhauOptional = hoKhauRepository.findById(idMoi);
                 if (hoKhauOptional.isPresent()) {
+
+                    Optional<DiemDanh> diemDanhOpt = diemDanhRepository.getByCuocHopIdAndHoKhauId(cuocHop.getId(), hoKhauOptional.get().getId());
+                    if (diemDanhOpt.isPresent())
+                        continue;
+
                     DiemDanh diemDanh = new DiemDanh();
                     diemDanh.setDiemDanh(true);
                     diemDanh.setCuocHop(cuocHop);
