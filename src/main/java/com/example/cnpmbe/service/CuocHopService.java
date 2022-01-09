@@ -97,6 +97,7 @@ public class CuocHopService {
         for (HoKhau hoKhau: cuocHop.getHoKhaus()) {
             DiemDanh diemDanh = new DiemDanh();
             diemDanh.setDiemDanh(true);
+            diemDanhRepository.save(diemDanh);
         }
 
         hoatDongService.createrNew("Tạo mới cuộc họp: " + cuocHop.getTieuDe());
