@@ -1458,6 +1458,93 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Thông số trang chủ",
+			"item": [
+				{
+					"name": "Lấy hoạt động",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức A\",\r\n    \"cccd\": \"0987654321\",\r\n    \"diaChi\": \"Hà Nam\",\r\n    \"tuNgay\": \"2020-10-10T00:00:00Z\",\r\n    \"denNgay\": \"2020-11-20T00:00:00Z\",\r\n    \"lyDo\": \"Đi học\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/hoatdong",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"hoatdong"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy thông số",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authenToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoVaTen\": \"Hà Đức A\",\r\n    \"cccd\": \"0987654321\",\r\n    \"diaChi\": \"Hà Nam\",\r\n    \"tuNgay\": \"2020-10-10T00:00:00Z\",\r\n    \"denNgay\": \"2020-11-20T00:00:00Z\",\r\n    \"lyDo\": \"Đi học\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/thongso",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"thongso"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
