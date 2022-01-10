@@ -199,7 +199,17 @@ public class CuocHopService {
             idCuocHops.add(cuocHop.getId());
         }
 
-        List<DiemDanh> diemDanhs = diemDanhRepository.getAllByCuocHopIdIn(idCuocHops);
+        List<DiemDanh> diemDanhse = diemDanhRepository.getAllByCuocHopIdIn(idCuocHops);
+        List<DiemDanh> diemDanhs = new ArrayList<>();
+        for (DiemDanh diemDanh: diemDanhse) {
+            try {
+                Optional<CuocHop> cuocHopOptional = cuocHopRepository.findByIdAndHoKhausId(diemDanh.getCuocHop().getId(), diemDanh.getHoKhau().getId());
+                if (cuocHopOptional.isPresent())
+                    diemDanhs.add(diemDanh);
+            } catch (Exception e) {
+                continue;
+            }
+        }
 
         long thamGia = 0L;
         long vangCoLyDo = 0L;
@@ -211,7 +221,7 @@ public class CuocHopService {
             }
             else {
                 if (diemDanh.getLyDo().equals(""))
-                    vangCoLyDo++;
+                    vangKhongLyDo++;
                 else
                     vangCoLyDo++;
             }
@@ -237,7 +247,17 @@ public class CuocHopService {
             idCuocHops.add(cuocHop.getId());
         }
 
-        List<DiemDanh> diemDanhs = diemDanhRepository.getAllByCuocHopIdIn(idCuocHops);
+        List<DiemDanh> diemDanhse = diemDanhRepository.getAllByCuocHopIdIn(idCuocHops);
+        List<DiemDanh> diemDanhs = new ArrayList<>();
+        for (DiemDanh diemDanh: diemDanhse) {
+            try {
+                Optional<CuocHop> cuocHopOptional = cuocHopRepository.findByIdAndHoKhausId(diemDanh.getCuocHop().getId(), diemDanh.getHoKhau().getId());
+                if (cuocHopOptional.isPresent())
+                    diemDanhs.add(diemDanh);
+            } catch (Exception e) {
+                continue;
+            }
+        }
 
         Map<Long, Long> thamGia = new HashMap<>();
         Map<Long, Long> vangCoPhep = new HashMap<>();
@@ -319,7 +339,18 @@ public class CuocHopService {
             idCuocHops.add(cuocHop.getId());
         }
 
-        List<DiemDanh> diemDanhs = diemDanhRepository.getAllByCuocHopIdInAndHoKhauId(idCuocHops, id);
+        List<DiemDanh> diemDanhse = diemDanhRepository.getAllByCuocHopIdInAndHoKhauId(idCuocHops, id);
+        List<DiemDanh> diemDanhs = new ArrayList<>();
+        for (DiemDanh diemDanh: diemDanhse) {
+            try {
+                Optional<CuocHop> cuocHopOptional = cuocHopRepository.findByIdAndHoKhausId(diemDanh.getCuocHop().getId(), diemDanh.getHoKhau().getId());
+                if (cuocHopOptional.isPresent())
+                    diemDanhs.add(diemDanh);
+            } catch (Exception e) {
+                continue;
+            }
+        }
+
         Optional<HoKhau> hoKhauOptional = hoKhauRepository.findById(id);
         if (!hoKhauOptional.isPresent())
             return ResponseEntity.badRequest().body(APIResponseBuilder.buildExceptionResponse(ExceptionMessages.HO_KHAU_ID_NOT_FOUND));
@@ -339,7 +370,7 @@ public class CuocHopService {
                     chiTiet.getCuocHopVangKhongLyDo().add(cuocHopEzResponse);
                 }
                 else {
-                    chiTiet.getCuocHopVangKhongLyDo().add(cuocHopEzResponse);
+                    chiTiet.getCuocHopVangCoLyDo().add(cuocHopEzResponse);
                 }
             }
         }
