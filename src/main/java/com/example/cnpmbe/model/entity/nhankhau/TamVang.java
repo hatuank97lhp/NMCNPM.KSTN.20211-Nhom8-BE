@@ -14,13 +14,13 @@ import java.time.Instant;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "tam_tru")
+@Table(name = "tam_vang")
 public class TamVang {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tam_tru_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tam_vang_id_seq")
     @SequenceGenerator(
-            name = "tam_tru_id_seq",
-            sequenceName = "tam_tru_id_seq",
+            name = "tam_vang_id_seq",
+            sequenceName = "tam_vang_id_seq",
             allocationSize = 1
     )
     private Long id;
