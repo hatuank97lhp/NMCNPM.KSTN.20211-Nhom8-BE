@@ -22,4 +22,6 @@ public interface DiemDanhRepository extends JpaRepository<DiemDanh, Long> {
     List<DiemDanh> getAllByCuocHopIdInAndHoKhauId(List<Long> ids, Long idHk);
 
     List<DiemDanh> getAllByCuocHopIdAndDiemDanh(Long id, boolean diemDanh);
+
+    List<DiemDanh> getAllByCuocHopIdAndHoKhauIdIn(Long cuocHop, List<Long> hoKhaus);
 }

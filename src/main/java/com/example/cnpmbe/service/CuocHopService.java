@@ -174,11 +174,6 @@ public class CuocHopService {
             }
         }
 
-        List<DiemDanh> diemDanhs = diemDanhRepository.getAllByCuocHopIdAndHoKhauId(id, idHoKhau);
-        for (DiemDanh diemDanh: diemDanhs) {
-            diemDanhRepository.delete(diemDanh);
-        }
-
         return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS));
     }
 
@@ -189,11 +184,6 @@ public class CuocHopService {
             return ResponseEntity.badRequest().body(APIResponseBuilder.buildExceptionResponse(ExceptionMessages.CUOC_HOP_ID_NOT_FOUND));
 
         CuocHop cuocHop = cuocHopOpt.get();
-
-        List<DiemDanh> diemDanhs = diemDanhRepository.getAllByCuocHopId(id);
-        for (DiemDanh diemDanh: diemDanhs) {
-            diemDanhRepository.delete(diemDanh);
-        }
 
         hoatDongService.createrNew("Xóa cuộc họp: " + cuocHop.getTieuDe());
         cuocHopRepository.delete(cuocHop);
@@ -415,15 +405,6 @@ public class CuocHopService {
         for (Long idMoi: hoKhauCuocHop.getHoKhaus()) {
             if (!idNhanKhauMoi.contains(idMoi)) {
                 idNhanKhauMoi.add(idMoi);
-            }
-        }
-
-        for (HoKhau hoKhau: cuocHop.getHoKhaus()) {
-            if (!idNhanKhauMoi.contains(hoKhau.getId())) {
-                Optional<DiemDanh> diemDanh = diemDanhRepository.getByCuocHopIdAndHoKhauId(cuocHop.getId(), hoKhau.getId());
-                if (diemDanh.isPresent()) {
-                    diemDanhRepository.delete(diemDanh.get());
-                }
             }
         }
 

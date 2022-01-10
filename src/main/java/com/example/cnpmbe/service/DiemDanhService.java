@@ -41,7 +41,6 @@ public class DiemDanhService {
             diemDanhOptional.get().setLyDo(diemDanhRequest.getLyDo());
             diemDanhRepository.save(diemDanhOptional.get());
 
-
             DiemDanhSimpleResponse diemDanhSimpleResponse = new DiemDanhSimpleResponse(diemDanhOptional.get());
             return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, diemDanhSimpleResponse));
         }
@@ -67,9 +66,17 @@ public class DiemDanhService {
 
     @ReadOnlyProperty
     public ResponseEntity<APIResponse> getAllDiemDanhByCuocHop(Long cuocHop) {
-        List<DiemDanh> diemDanhs = diemDanhRepository.getAllByCuocHopId(cuocHop);
-
         List<DiemDanhSimpleResponse> diemDanhSimpleResponses = new ArrayList<>();
+        Optional<CuocHop> cuocHopOptional = cuocHopRepository.findById(cuocHop);
+        if (!cuocHopOptional.isPresent())
+            return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, diemDanhSimpleResponses));
+
+        List<Long> ids = new ArrayList<>();
+        for (HoKhau hoKhau: cuocHopOptional.get().getHoKhaus())
+            ids.add(hoKhau.getId());
+
+        List<DiemDanh> diemDanhs = diemDanhRepository.getAllByCuocHopIdAndHoKhauIdIn(cuocHop, ids);
+
         for (DiemDanh diemDanh: diemDanhs) {
             diemDanhSimpleResponses.add(new DiemDanhSimpleResponse(diemDanh));
         }
