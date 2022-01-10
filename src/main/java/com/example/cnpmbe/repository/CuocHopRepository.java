@@ -16,6 +16,8 @@ public interface CuocHopRepository extends JpaRepository<CuocHop, Long> {
 
     Page<CuocHop> findAllByTieuDeContains(String tieuDe, Pageable pageable);
 
+    List<CuocHop> findAllByTieuDeContains(String tieuDe);
+
     Optional<CuocHop> findById(Long id);
 
     List<CuocHop> findAllByThoiGianBetweenOrderByThoiGianAsc(Instant from, Instant to);

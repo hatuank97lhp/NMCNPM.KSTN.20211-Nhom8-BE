@@ -46,7 +46,7 @@ public class CuocHopService {
 
     @ReadOnlyProperty
     public ResponseEntity<APIResponse> getAllCuocHop(String keyword, Pageable pageable) {
-        Page<CuocHop> cuocHops = cuocHopRepository.findAllByTieuDeContains(keyword, pageable);
+        List<CuocHop> cuocHops = cuocHopRepository.findAllByTieuDeContains(keyword);
 
         List<CuocHopSimpleResponse> cuocHopSimpleResponses = new ArrayList<>();
         for (CuocHop cuocHop: cuocHops) {
@@ -71,8 +71,9 @@ public class CuocHopService {
             cuocHopSimpleResponses.add(cuocHopSimpleResponse);
         }
 
-        Page<CuocHopSimpleResponse> page = new PageImpl<>(cuocHopSimpleResponses, pageable, cuocHopSimpleResponses.size());
-
+        final int start = (int)pageable.getOffset();
+        final int end = Math.min((start + pageable.getPageSize()), cuocHopSimpleResponses.size());
+        Page<CuocHopSimpleResponse> page = new PageImpl<>(cuocHopSimpleResponses.subList(start, end), pageable, cuocHopSimpleResponses.size());
         return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, page));
     }
 
@@ -219,6 +220,7 @@ public class CuocHopService {
     public ResponseEntity<APIResponse> thongKeCuocHop(Instant from, Instant to) {
         List<CuocHop> cuocHops = cuocHopRepository.findAllByThoiGianBetweenOrderByThoiGianAsc(from, to);
         List<Long> idCuocHops = new ArrayList<>();
+        idCuocHops.add(0L);
         for (CuocHop cuocHop: cuocHops) {
             idCuocHops.add(cuocHop.getId());
         }
@@ -272,6 +274,7 @@ public class CuocHopService {
     public ResponseEntity<APIResponse> thongKeNguoiThamGia(Instant from, Instant to) {
         List<CuocHop> cuocHops = cuocHopRepository.findAllByThoiGianBetweenOrderByThoiGianAsc(from, to);
         List<Long> idCuocHops = new ArrayList<>();
+        idCuocHops.add(0L);
         for (CuocHop cuocHop: cuocHops) {
             idCuocHops.add(cuocHop.getId());
         }
@@ -369,6 +372,7 @@ public class CuocHopService {
     public ResponseEntity<APIResponse> getHoKhauThamGiaTheoId(Long id, Instant from, Instant to) {
         List<CuocHop> cuocHops = cuocHopRepository.findAllByThoiGianBetweenOrderByThoiGianAsc(from, to);
         List<Long> idCuocHops = new ArrayList<>();
+        idCuocHops.add(0L);
         for (CuocHop cuocHop: cuocHops) {
             idCuocHops.add(cuocHop.getId());
         }
@@ -429,6 +433,7 @@ public class CuocHopService {
 
         CuocHop cuocHop = cuocHopOptional.get();
         List<Long> idHoKhau = new ArrayList<>();
+        idHoKhau.add(0L);
         for (HoKhau hoKhau: cuocHop.getHoKhaus()) {
             idHoKhau.add(hoKhau.getId());
         }

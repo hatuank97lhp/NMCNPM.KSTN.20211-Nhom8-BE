@@ -72,6 +72,7 @@ public class DiemDanhService {
             return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, diemDanhSimpleResponses));
 
         List<Long> ids = new ArrayList<>();
+        ids.add(0L);
         for (HoKhau hoKhau: cuocHopOptional.get().getHoKhaus())
             ids.add(hoKhau.getId());
 
