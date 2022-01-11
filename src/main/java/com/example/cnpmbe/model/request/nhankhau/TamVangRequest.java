@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.Instant;
 
@@ -12,17 +13,19 @@ import java.time.Instant;
 @NoArgsConstructor
 public class TamVangRequest {
 
+    @Size(min = 1)
     private String hoVaTen = "";
 
     private String cccd = "";
 
-    @Size(max = 65536)
+    @Size(min = 1, max = 65536)
     private String diaChi = "";
 
+    @NotNull
     private Instant tuNgay;
 
     private Instant denNgay;
 
-    @Size(max = 65536)
+    @Size(min = 1, max = 65536)
     private String lyDo = "";
 }

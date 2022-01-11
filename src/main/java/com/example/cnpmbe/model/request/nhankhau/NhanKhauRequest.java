@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.Instant;
 
@@ -11,31 +12,37 @@ import java.time.Instant;
 @Setter
 @NoArgsConstructor
 public class NhanKhauRequest {
-    private String hoVaTen = "";
+    @Size(min = 1)
+    private String hoVaTen;
 
     private String tenKhac = "";
 
+    @NotNull
     private Instant ngaySinh;
 
+    @Size(min = 1)
     private String gioiTinh = "";
 
     private String cccd = "";
 
     private String soHoChieu = "";
 
-    @Size(max = 65536)
+    @Size(min = 1, max = 65536)
     private String nguyenQuan = "";
 
+    @Size(min = 1)
     private String danToc = "";
 
+    @Size(min = 1)
     private String tonGiao = "";
 
+    @Size(min = 1)
     private String quocTich = "";
 
-    @Size(max = 65536)
+    @Size(min = 1, max = 65536)
     private String noiThuongTru = "";
 
-    @Size(max = 65536)
+    @Size(min = 1, max = 65536)
     private String diaChiHienTai = "";
 
     private String trinhDoHocVan = "";
@@ -45,6 +52,7 @@ public class NhanKhauRequest {
     @Size(max = 65536)
     private String noiLamViec = "";
 
+    @Size(min = 1)
     private String quanHeVoiChuHo = "";
 
     private Boolean isChuHo = false;

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -13,20 +14,20 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class CuocHopRequest {
-    @Size(max = 65536)
+    @Size(min = 1, max = 65536)
     private String tieuDe = "";
 
+    @NotNull
     private Instant thoiGian;
 
-    @Size(max = 65536)
+    @Size(min = 1, max = 65536)
     private String diaDiem = "";
 
-    @Size(max = 65536)
+    @Size(min = 1, max = 65536)
     private String noiDung = "";
 
     @Size(max = 65536)
     private String banBaoCao = "";
-
 
     private String nguoiTao = "";
 
