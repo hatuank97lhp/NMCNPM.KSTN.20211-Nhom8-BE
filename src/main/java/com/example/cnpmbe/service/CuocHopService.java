@@ -47,9 +47,10 @@ public class CuocHopService {
     @ReadOnlyProperty
     public ResponseEntity<APIResponse> getAllCuocHop(String keyword, Pageable pageable) {
         List<CuocHop> cuocHops = cuocHopRepository.findAllByTieuDeContains(keyword);
+        List<CuocHop> cuocHops1 = cuocHopRepository.findAllByTieuDeContains(keyword, pageable);
 
         List<CuocHopSimpleResponse> cuocHopSimpleResponses = new ArrayList<>();
-        for (CuocHop cuocHop: cuocHops) {
+        for (CuocHop cuocHop: cuocHops1) {
             CuocHopSimpleResponse cuocHopSimpleResponse = new CuocHopSimpleResponse(cuocHop);
             List<DiemDanh> diemDanhsP = diemDanhRepository.getAllByCuocHopIdAndDiemDanh(cuocHop.getId(), true);
             List<DiemDanh> diemDanhs = new ArrayList<>();
@@ -71,9 +72,7 @@ public class CuocHopService {
             cuocHopSimpleResponses.add(cuocHopSimpleResponse);
         }
 
-        final int start = (int)pageable.getOffset();
-        final int end = Math.min((start + pageable.getPageSize()), cuocHopSimpleResponses.size());
-        Page<CuocHopSimpleResponse> page = new PageImpl<>(cuocHopSimpleResponses.subList(start, end), pageable, cuocHopSimpleResponses.size());
+        Page<CuocHopSimpleResponse> page = new PageImpl<>(cuocHopSimpleResponses, pageable, cuocHops.size());
         return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, page));
     }
 
