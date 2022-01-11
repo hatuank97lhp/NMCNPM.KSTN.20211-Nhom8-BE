@@ -14,9 +14,9 @@ import java.util.Optional;
 public interface CuocHopRepository extends JpaRepository<CuocHop, Long> {
     List<CuocHop> findAllByHoKhausId(Long id);
 
-    List<CuocHop> findAllByTieuDeContains(String tieuDe, Pageable pageable);
+    List<CuocHop> findAllByTieuDeContainsOrDiaDiemContainsOrNguoiTaoContains(String tieuDe, String diaDiem, String nguoiTao, Pageable pageable);
 
-    List<CuocHop> findAllByTieuDeContains(String tieuDe);
+    List<CuocHop> findAllByTieuDeContainsOrDiaDiemContainsOrNguoiTaoContains(String tieuDe, String diaDiem, String nguoiTao);
 
     Optional<CuocHop> findById(Long id);
 

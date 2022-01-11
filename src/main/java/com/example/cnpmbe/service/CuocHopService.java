@@ -46,8 +46,8 @@ public class CuocHopService {
 
     @ReadOnlyProperty
     public ResponseEntity<APIResponse> getAllCuocHop(String keyword, Pageable pageable) {
-        List<CuocHop> cuocHops = cuocHopRepository.findAllByTieuDeContains(keyword);
-        List<CuocHop> cuocHops1 = cuocHopRepository.findAllByTieuDeContains(keyword, pageable);
+        List<CuocHop> cuocHops = cuocHopRepository.findAllByTieuDeContainsOrDiaDiemContainsOrNguoiTaoContains(keyword, keyword, keyword);
+        List<CuocHop> cuocHops1 = cuocHopRepository.findAllByTieuDeContainsOrDiaDiemContainsOrNguoiTaoContains(keyword, keyword, keyword, pageable);
 
         List<CuocHopSimpleResponse> cuocHopSimpleResponses = new ArrayList<>();
         for (CuocHop cuocHop: cuocHops1) {
