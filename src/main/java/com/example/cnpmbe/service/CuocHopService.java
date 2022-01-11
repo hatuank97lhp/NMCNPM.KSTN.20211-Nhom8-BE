@@ -52,15 +52,29 @@ public class CuocHopService {
         List<CuocHopSimpleResponse> cuocHopSimpleResponses = new ArrayList<>();
         for (CuocHop cuocHop: cuocHops1) {
             CuocHopSimpleResponse cuocHopSimpleResponse = new CuocHopSimpleResponse(cuocHop);
-            List<DiemDanh> diemDanhsP = diemDanhRepository.getAllByCuocHopIdAndDiemDanh(cuocHop.getId(), true);
+
+            List<DiemDanh> diemDanhsP = new ArrayList<>();
+            for (HoKhau hoKhau: cuocHop.getHoKhaus()) {
+                Optional<DiemDanh> diemDanh = diemDanhRepository.getByCuocHopIdAndDiemDanhAndHoKhauId(cuocHop.getId(), true, hoKhau.getId());
+                if (diemDanh.isPresent())
+                    diemDanhsP.add(diemDanh.get());
+            }
             List<DiemDanh> diemDanhs = new ArrayList<>();
             for (DiemDanh diemDanh: diemDanhsP) {
                 if (diemDanh.getHoKhau() != null && diemDanh.getCuocHop() != null ) {
                     diemDanhs.add(diemDanh);
                 }
             }
-            List<DiemDanh> vangMatP = diemDanhRepository.getAllByCuocHopIdAndDiemDanh(cuocHop.getId(), false);
+
+            List<DiemDanh> vangMatP = new ArrayList<>();
             List<DiemDanh> vangMat = new ArrayList<>();
+
+            for (HoKhau hoKhau: cuocHop.getHoKhaus()) {
+                Optional<DiemDanh> diemDanh = diemDanhRepository.getByCuocHopIdAndDiemDanhAndHoKhauId(cuocHop.getId(), false, hoKhau.getId());
+                if (diemDanh.isPresent())
+                    vangMatP.add(diemDanh.get());
+            }
+
             for (DiemDanh diemDanh: vangMatP) {
                 if (diemDanh.getHoKhau() != null && diemDanh.getCuocHop() != null ) {
                     vangMat.add(diemDanh);
@@ -84,8 +98,19 @@ public class CuocHopService {
 
         CuocHopSimpleResponse cuocHopSimpleResponse = new CuocHopSimpleResponse(cuocHop.get());
 
-        List<DiemDanh> diemDanhsP = diemDanhRepository.getAllByCuocHopIdAndDiemDanh(cuocHop.get().getId(), true);
-        List<DiemDanh> vangMatP = diemDanhRepository.getAllByCuocHopIdAndDiemDanh(cuocHop.get().getId(), false);
+        List<DiemDanh> diemDanhsP = new ArrayList<>();
+        for (HoKhau hoKhau: cuocHop.get().getHoKhaus()) {
+            Optional<DiemDanh> diemDanh = diemDanhRepository.getByCuocHopIdAndDiemDanhAndHoKhauId(cuocHop.get().getId(), true, hoKhau.getId());
+            if (diemDanh.isPresent())
+                diemDanhsP.add(diemDanh.get());
+        }
+
+        List<DiemDanh> vangMatP = new ArrayList<>();
+        for (HoKhau hoKhau: cuocHop.get().getHoKhaus()) {
+            Optional<DiemDanh> diemDanh = diemDanhRepository.getByCuocHopIdAndDiemDanhAndHoKhauId(cuocHop.get().getId(), false, hoKhau.getId());
+            if (diemDanh.isPresent())
+                vangMatP.add(diemDanh.get());
+        }
 
         List<DiemDanh> diemDanhs = new ArrayList<>();
         for (DiemDanh diemDanh: diemDanhsP) {
