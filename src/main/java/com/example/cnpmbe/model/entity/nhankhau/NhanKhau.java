@@ -63,6 +63,8 @@ public class NhanKhau {
 
     private Boolean isChuHo = false;
 
+    private int idhk = 0;
+
     public NhanKhau(NhanKhauRequest nhanKhauRequest) {
         hoVaTen = nhanKhauRequest.getHoVaTen();
         tenKhac = nhanKhauRequest.getTenKhac();

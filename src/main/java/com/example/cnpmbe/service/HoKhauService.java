@@ -71,7 +71,19 @@ public class HoKhauService {
             }
         }
 
+
+
         hoKhauRepository.save(hoKhau);
+
+        for (Long nhanKhauId: hoKhauRequest.getNhanKhaus()) {
+            Optional<NhanKhau> nhanKhau = nhanKhauRepository.findById(nhanKhauId);
+            if (nhanKhau.isPresent()) {
+                nhanKhau.get().setIdhk((hoKhau.getId().intValue()));
+                nhanKhauRepository.save(nhanKhau.get());
+            }
+        }
+
+
 
         hoatDongService.createrNew("Thêm mới hộ khẩu: " + hoKhau.getHoTenChuHo());
         return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, hoKhau));
@@ -98,6 +110,14 @@ public class HoKhauService {
         }
 
         hoKhauRepository.save(hoKhau);
+
+        for (Long nhanKhauId: hoKhauRequest.getNhanKhaus()) {
+            Optional<NhanKhau> nhanKhau = nhanKhauRepository.findById(nhanKhauId);
+            if (nhanKhau.isPresent()) {
+                nhanKhau.get().setIdhk((hoKhau.getId().intValue()));
+                nhanKhauRepository.save(nhanKhau.get());
+            }
+        }
 
         hoatDongService.createrNew("Cập nhật hộ khẩu: " + hoKhau.getHoTenChuHo());
         return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, hoKhau));

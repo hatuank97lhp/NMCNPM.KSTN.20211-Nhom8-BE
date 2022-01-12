@@ -35,7 +35,7 @@ public class NhanKhauService {
 
     @ReadOnlyProperty
     public ResponseEntity<APIResponse> getAllNhanKhau(Pageable pageable, String keyword) {
-        Page<NhanKhau> nhanKhaus = nhanKhauRepository.getAllByHoVaTenContainsOrCccdContains(keyword, keyword, pageable);
+        Page<NhanKhau> nhanKhaus = nhanKhauRepository.getAllByHoVaTenContainsAndIdhkIsNotOrCccdContainsAndIdhkIsNot(keyword, (int)(0), keyword, (int)(0), pageable);
         return ResponseEntity.ok().body(APIResponseBuilder.buildResponse(ResultMessages.API_SUCCESS, nhanKhaus));
     }
 

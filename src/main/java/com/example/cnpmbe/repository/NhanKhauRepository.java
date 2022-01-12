@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface NhanKhauRepository extends JpaRepository<NhanKhau, Long> {
-    Page<NhanKhau> getAllByHoVaTenContainsOrCccdContains(String hoVaTen, String cccd, Pageable pageable);
+    Page<NhanKhau> getAllByHoVaTenContainsAndIdhkIsNotOrCccdContainsAndIdhkIsNot(String hoVaTen, int idhk2, String cccd, int idhk, Pageable pageable);
 
     Optional<NhanKhau> findById(Long id);
 
